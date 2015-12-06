@@ -1,0 +1,30 @@
+court:
+    path:     /
+    defaults: { _controller: "MiwClubPadelBundle:Courts:index" }
+
+court_show:
+    path:     /{id}/show
+    defaults: { _controller: "MiwClubPadelBundle:Courts:show" }
+
+court_new:
+    path:     /new
+    defaults: { _controller: "MiwClubPadelBundle:Courts:new" }
+
+court_create:
+    path:     /create
+    defaults: { _controller: "MiwClubPadelBundle:Courts:create" }
+    methods:  POST
+
+court_edit:
+    path:     /{id}/edit
+    defaults: { _controller: "MiwClubPadelBundle:Courts:edit" }
+
+court_update:
+    path:     /{id}/update
+    defaults: { _controller: "MiwClubPadelBundle:Courts:update" }
+    methods:  [POST, PUT]
+
+court_delete:
+    path:     /{id}/delete
+    defaults: { _controller: "MiwClubPadelBundle:Courts:delete" }
+    methods:  [POST, DELETE]

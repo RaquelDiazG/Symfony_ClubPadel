@@ -1,3 +1,7 @@
+miw_club_padel_court:
+    resource: "@MiwClubPadelBundle/Resources/config/routing/courts.yml"
+    prefix:   /court
+
 miw_club_padel_homepage:
     path:     /hello/{name}
     defaults: { _controller: MiwClubPadelBundle:Default:index }
