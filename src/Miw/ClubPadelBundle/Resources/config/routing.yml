@@ -1,3 +1,7 @@
+miw_club_padel_reservation:
+    resource: "@MiwClubPadelBundle/Resources/config/routing/reservations.yml"
+    prefix:   /reservation
+
 miw_club_padel_group:
     resource: "@MiwClubPadelBundle/Resources/config/routing/groups.yml"
     prefix:   /group

@@ -1,0 +1,30 @@
+reservation:
+    path:     /
+    defaults: { _controller: "MiwClubPadelBundle:Reservations:index" }
+
+reservation_show:
+    path:     /{id}/show
+    defaults: { _controller: "MiwClubPadelBundle:Reservations:show" }
+
+reservation_new:
+    path:     /new
+    defaults: { _controller: "MiwClubPadelBundle:Reservations:new" }
+
+reservation_create:
+    path:     /create
+    defaults: { _controller: "MiwClubPadelBundle:Reservations:create" }
+    methods:  POST
+
+reservation_edit:
+    path:     /{id}/edit
+    defaults: { _controller: "MiwClubPadelBundle:Reservations:edit" }
+
+reservation_update:
+    path:     /{id}/update
+    defaults: { _controller: "MiwClubPadelBundle:Reservations:update" }
+    methods:  [POST, PUT]
+
+reservation_delete:
+    path:     /{id}/delete
+    defaults: { _controller: "MiwClubPadelBundle:Reservations:delete" }
+    methods:  [POST, DELETE]
