@@ -1,0 +1,39 @@
+Miw\ClubPadelBundle\Entity\Groups:
+    type: entity
+    table: groups
+    uniqueConstraints:
+        UNIQ_F06D39705E237E06:
+            columns:
+                - name
+    id:
+        id:
+            type: integer
+            nullable: false
+            options:
+                unsigned: false
+            id: true
+            generator:
+                strategy: IDENTITY
+    fields:
+        name:
+            type: string
+            nullable: false
+            length: 255
+            options:
+                fixed: false
+        roles:
+            type: array
+            nullable: false
+            length: null
+            options:
+                fixed: false
+    manyToMany:
+        user:
+            targetEntity: Users
+            cascade: {  }
+            fetch: LAZY
+            mappedBy: group
+            inversedBy: null
+            joinTable: null
+            orderBy: null
+    lifecycleCallbacks: {  }

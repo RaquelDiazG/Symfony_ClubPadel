@@ -1,0 +1,45 @@
+Miw\ClubPadelBundle\Entity\Reservations:
+    type: entity
+    table: reservations
+    uniqueConstraints:
+        UNIQ_4DA23963AE193F:
+            columns:
+                - court
+        UNIQ_4DA2398D93D649:
+            columns:
+                - user
+    id:
+        id:
+            type: integer
+            nullable: false
+            options:
+                unsigned: false
+            id: true
+            generator:
+                strategy: IDENTITY
+    fields:
+        datetime:
+            type: datetime
+            nullable: false
+    manyToOne:
+        court:
+            targetEntity: Courts
+            cascade: {  }
+            fetch: LAZY
+            mappedBy: null
+            inversedBy: null
+            joinColumns:
+                court:
+                    referencedColumnName: id
+            orphanRemoval: false
+        user:
+            targetEntity: Users
+            cascade: {  }
+            fetch: LAZY
+            mappedBy: null
+            inversedBy: null
+            joinColumns:
+                user:
+                    referencedColumnName: id
+            orphanRemoval: false
+    lifecycleCallbacks: {  }
