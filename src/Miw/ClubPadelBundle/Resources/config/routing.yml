@@ -11,5 +11,6 @@ miw_club_padel_group:
     prefix:   /group
 
 miw_club_padel_court:
+    type:     rest
     resource: "@MiwClubPadelBundle/Resources/config/routing/courts.yml"
     prefix:   /court

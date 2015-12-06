@@ -2,39 +2,40 @@
 
 namespace Miw\ClubPadelBundle\Controller;
 
-use Symfony\Component\HttpFoundation\Request;
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-
+use FOS\RestBundle\Controller\FOSRestController;
 use Miw\ClubPadelBundle\Entity\Courts;
 use Miw\ClubPadelBundle\Form\CourtsType;
+use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\Form\Form;
+use Symfony\Component\HttpFoundation\Request;
+use FOS\RestBundle\Controller\Annotations as Rest;
 
 /**
  * Courts controller.
  *
  */
-class CourtsController extends Controller
-{
+class CourtsController extends FOSRestController {
 
     /**
      * Lists all Courts entities.
      *
      */
-    public function indexAction()
-    {
+    public function indexAction() {
         $em = $this->getDoctrine()->getManager();
 
         $entities = $em->getRepository('MiwClubPadelBundle:Courts')->findAll();
 
-        return $this->render('MiwClubPadelBundle:Courts:index.html.twig', array(
-            'entities' => $entities,
-        ));
+//        return $this->render('MiwClubPadelBundle:Courts:index.html.twig', array(
+//                    'entities' => $entities,
+//        ));
+        return $entities;
     }
+
     /**
      * Creates a new Courts entity.
      *
      */
-    public function createAction(Request $request)
-    {
+    public function createAction(Request $request) {
         $entity = new Courts();
         $form = $this->createCreateForm($entity);
         $form->handleRequest($request);
@@ -48,8 +49,8 @@ class CourtsController extends Controller
         }
 
         return $this->render('MiwClubPadelBundle:Courts:new.html.twig', array(
-            'entity' => $entity,
-            'form'   => $form->createView(),
+                    'entity' => $entity,
+                    'form' => $form->createView(),
         ));
     }
 
@@ -58,10 +59,9 @@ class CourtsController extends Controller
      *
      * @param Courts $entity The entity
      *
-     * @return \Symfony\Component\Form\Form The form
+     * @return Form The form
      */
-    private function createCreateForm(Courts $entity)
-    {
+    private function createCreateForm(Courts $entity) {
         $form = $this->createForm(new CourtsType(), $entity, array(
             'action' => $this->generateUrl('court_create'),
             'method' => 'POST',
@@ -76,45 +76,47 @@ class CourtsController extends Controller
      * Displays a form to create a new Courts entity.
      *
      */
-    public function newAction()
-    {
+    public function newAction() {
         $entity = new Courts();
-        $form   = $this->createCreateForm($entity);
+        $form = $this->createCreateForm($entity);
 
         return $this->render('MiwClubPadelBundle:Courts:new.html.twig', array(
-            'entity' => $entity,
-            'form'   => $form->createView(),
+                    'entity' => $entity,
+                    'form' => $form->createView(),
         ));
     }
 
     /**
      * Finds and displays a Courts entity.
-     *
      */
-    public function showAction($id)
-    {
-        $em = $this->getDoctrine()->getManager();
-
-        $entity = $em->getRepository('MiwClubPadelBundle:Courts')->find($id);
-
-        if (!$entity) {
-            throw $this->createNotFoundException('Unable to find Courts entity.');
-        }
-
-        $deleteForm = $this->createDeleteForm($id);
-
-        return $this->render('MiwClubPadelBundle:Courts:show.html.twig', array(
-            'entity'      => $entity,
-            'delete_form' => $deleteForm->createView(),
-        ));
+    public function showAction(Courts $court) {
+//        $em = $this->getDoctrine()->getManager();
+//
+//        $entity = $em->getRepository('MiwClubPadelBundle:Courts')->find($id);
+//
+//        if (!$entity) {
+//            throw $this->createNotFoundException('Unable to find Courts entity.');
+//        }
+//
+//        $deleteForm = $this->createDeleteForm($id);
+//
+//        return $this->render('MiwClubPadelBundle:Courts:show.html.twig', array(
+//            'entity'      => $entity,
+//            'delete_form' => $deleteForm->createView(),
+//        ));
+//        ----------------------------------------------------
+//        //es necesario añadir en el comentario de la cabecera @Rest\View()
+//        $view = $this->view($court, 200);
+//        return $this->handleView($view);
+//        ----------------------------------------------------
+        return $court;
     }
 
     /**
      * Displays a form to edit an existing Courts entity.
      *
      */
-    public function editAction($id)
-    {
+    public function editAction($id) {
         $em = $this->getDoctrine()->getManager();
 
         $entity = $em->getRepository('MiwClubPadelBundle:Courts')->find($id);
@@ -127,21 +129,20 @@ class CourtsController extends Controller
         $deleteForm = $this->createDeleteForm($id);
 
         return $this->render('MiwClubPadelBundle:Courts:edit.html.twig', array(
-            'entity'      => $entity,
-            'edit_form'   => $editForm->createView(),
-            'delete_form' => $deleteForm->createView(),
+                    'entity' => $entity,
+                    'edit_form' => $editForm->createView(),
+                    'delete_form' => $deleteForm->createView(),
         ));
     }
 
     /**
-    * Creates a form to edit a Courts entity.
-    *
-    * @param Courts $entity The entity
-    *
-    * @return \Symfony\Component\Form\Form The form
-    */
-    private function createEditForm(Courts $entity)
-    {
+     * Creates a form to edit a Courts entity.
+     *
+     * @param Courts $entity The entity
+     *
+     * @return Form The form
+     */
+    private function createEditForm(Courts $entity) {
         $form = $this->createForm(new CourtsType(), $entity, array(
             'action' => $this->generateUrl('court_update', array('id' => $entity->getId())),
             'method' => 'PUT',
@@ -151,12 +152,12 @@ class CourtsController extends Controller
 
         return $form;
     }
+
     /**
      * Edits an existing Courts entity.
      *
      */
-    public function updateAction(Request $request, $id)
-    {
+    public function updateAction(Request $request, $id) {
         $em = $this->getDoctrine()->getManager();
 
         $entity = $em->getRepository('MiwClubPadelBundle:Courts')->find($id);
@@ -176,17 +177,17 @@ class CourtsController extends Controller
         }
 
         return $this->render('MiwClubPadelBundle:Courts:edit.html.twig', array(
-            'entity'      => $entity,
-            'edit_form'   => $editForm->createView(),
-            'delete_form' => $deleteForm->createView(),
+                    'entity' => $entity,
+                    'edit_form' => $editForm->createView(),
+                    'delete_form' => $deleteForm->createView(),
         ));
     }
+
     /**
      * Deletes a Courts entity.
      *
      */
-    public function deleteAction(Request $request, $id)
-    {
+    public function deleteAction(Request $request, $id) {
         $form = $this->createDeleteForm($id);
         $form->handleRequest($request);
 
@@ -210,15 +211,15 @@ class CourtsController extends Controller
      *
      * @param mixed $id The entity id
      *
-     * @return \Symfony\Component\Form\Form The form
+     * @return Form The form
      */
-    private function createDeleteForm($id)
-    {
+    private function createDeleteForm($id) {
         return $this->createFormBuilder()
-            ->setAction($this->generateUrl('court_delete', array('id' => $id)))
-            ->setMethod('DELETE')
-            ->add('submit', 'submit', array('label' => 'Delete'))
-            ->getForm()
+                        ->setAction($this->generateUrl('court_delete', array('id' => $id)))
+                        ->setMethod('DELETE')
+                        ->add('submit', 'submit', array('label' => 'Delete'))
+                        ->getForm()
         ;
     }
+
 }
