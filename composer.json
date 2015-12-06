@@ -19,7 +19,7 @@
         "sensio/framework-extra-bundle": "^3.0.2",
         "incenteev/composer-parameter-handler": "~2.0",
         "friendsofsymfony/rest-bundle": "dev-master",
-        "symfony/serializer": "dev-master"
+        "jms/serializer-bundle": "dev-master"
     },
     "require-dev": {
         "sensio/generator-bundle": "~2.3",
