@@ -1,0 +1,30 @@
+user:
+    path:     /
+    defaults: { _controller: "MiwClubPadelBundle:Users:index" }
+
+user_show:
+    path:     /{id}/show
+    defaults: { _controller: "MiwClubPadelBundle:Users:show" }
+
+user_new:
+    path:     /new
+    defaults: { _controller: "MiwClubPadelBundle:Users:new" }
+
+user_create:
+    path:     /create
+    defaults: { _controller: "MiwClubPadelBundle:Users:create" }
+    methods:  POST
+
+user_edit:
+    path:     /{id}/edit
+    defaults: { _controller: "MiwClubPadelBundle:Users:edit" }
+
+user_update:
+    path:     /{id}/update
+    defaults: { _controller: "MiwClubPadelBundle:Users:update" }
+    methods:  [POST, PUT]
+
+user_delete:
+    path:     /{id}/delete
+    defaults: { _controller: "MiwClubPadelBundle:Users:delete" }
+    methods:  [POST, DELETE]
