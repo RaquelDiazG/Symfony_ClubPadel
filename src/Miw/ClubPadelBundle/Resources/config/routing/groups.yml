@@ -1,0 +1,30 @@
+group:
+    path:     /
+    defaults: { _controller: "MiwClubPadelBundle:Groups:index" }
+
+group_show:
+    path:     /{id}/show
+    defaults: { _controller: "MiwClubPadelBundle:Groups:show" }
+
+group_new:
+    path:     /new
+    defaults: { _controller: "MiwClubPadelBundle:Groups:new" }
+
+group_create:
+    path:     /create
+    defaults: { _controller: "MiwClubPadelBundle:Groups:create" }
+    methods:  POST
+
+group_edit:
+    path:     /{id}/edit
+    defaults: { _controller: "MiwClubPadelBundle:Groups:edit" }
+
+group_update:
+    path:     /{id}/update
+    defaults: { _controller: "MiwClubPadelBundle:Groups:update" }
+    methods:  [POST, PUT]
+
+group_delete:
+    path:     /{id}/delete
+    defaults: { _controller: "MiwClubPadelBundle:Groups:delete" }
+    methods:  [POST, DELETE]
