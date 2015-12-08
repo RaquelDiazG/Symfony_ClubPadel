@@ -27,10 +27,10 @@ class UsersController extends FOSRestController {
      * Creates a new Users entity.
      */
     public function createAction(Request $request) {
-        $entity = new Users($request->get("username"), $request->get("email"), $request->get("password"));
-//        $entity->addGroup($request->get("group"));
-//        $entity->setRoles($request->get("roles"));
         $em = $this->getDoctrine()->getManager();
+        $entity = new Users($request->get("username"), $request->get("email"), $request->get("password"));
+        $entity->addGroup($em->getRepository('MiwClubPadelBundle:Groups')->find($request->get("group")));
+        $entity->setRoles(explode(" ", $request->get("roles")));
         $em->persist($entity);
         $em->flush();
         return $entity;
@@ -51,8 +51,8 @@ class UsersController extends FOSRestController {
         $user->setUsername($request->get("username"));
         $user->setEmail($request->get("email"));
         $user->setPassword($request->get("password"));
-//        $user->addGroup($request->get("group"));
-//        $user->setGroup($request->get("roles"));
+        $user->addGroup($em->getRepository('MiwClubPadelBundle:Groups')->find($request->get("group")));
+        $user->setRoles(explode(" ", $request->get("roles")));
         $em->flush();
         return $user;
     }

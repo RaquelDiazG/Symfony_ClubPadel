@@ -29,11 +29,11 @@ class ReservationsController extends FOSRestController {
      * Creates a new Reservations entity.
      */
     public function createAction(Request $request) {
+        $em = $this->getDoctrine()->getManager();
         $entity = new Reservations();
         $entity->setDatetime(new \DateTime($request->get("datetime")));
-        $entity->setCourt($request->get("court"));
-        $entity->setUser($request->get("user"));
-        $em = $this->getDoctrine()->getManager();
+        $entity->setCourt($em->getRepository('MiwClubPadelBundle:Courts')->find($request->get("court")));
+        $entity->setUser($em->getRepository('MiwClubPadelBundle:Users')->find($request->get("user")));
         $em->persist($entity);
         $em->flush();
         return $entity;
@@ -53,8 +53,8 @@ class ReservationsController extends FOSRestController {
         $em = $this->getDoctrine()->getManager();
         $em->getRepository('MiwClubPadelBundle:Reservations');
         $reservation->setDatetime(new \DateTime($request->get("datetime")));
-        $reservation->setCourt($request->get("court"));
-        $reservation->setUser($request->get("user"));
+        $reservation->setCourt($em->getRepository('MiwClubPadelBundle:Courts')->find($request->get("court")));
+        $reservation->setUser($em->getRepository('MiwClubPadelBundle:Users')->find($request->get("user")));
         $em->flush();
         return $reservation;
     }

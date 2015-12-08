@@ -25,10 +25,11 @@ class GroupsController extends FOSRestController {
      * Creates a new Groups entity.
      */
     public function createAction(Request $request) {
+        $em = $this->getDoctrine()->getManager();
         $entity = new Groups();
         $entity->setName($request->get("name"));
-        $entity->setRoles($request->get("roles"));
-        $em = $this->getDoctrine()->getManager();
+        $entity->setRoles(explode(" ", $request->get("roles")));
+//        $entity->addUser($em->getRepository('MiwClubPadelBundle:Users')->find($request->get("user")));
         $em->persist($entity);
         $em->flush();
         return $entity;
@@ -48,7 +49,8 @@ class GroupsController extends FOSRestController {
         $em = $this->getDoctrine()->getManager();
         $em->getRepository('MiwClubPadelBundle:Groups');
         $group->setName($request->get("name"));
-        $group->setRoles($request->get("roles"));
+        $group->setRoles(explode(" ", $request->get("roles")));
+//        $group->addUser($em->getRepository('MiwClubPadelBundle:Users')->find($request->get("user")));
         $em->flush();
         return $group;
     }
