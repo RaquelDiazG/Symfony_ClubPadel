@@ -1,16 +1,19 @@
 miw_club_padel_user:
+    type:     rest
     resource: "@MiwClubPadelBundle/Resources/config/routing/users.yml"
-    prefix:   /user
+    prefix:   api/users
 
 miw_club_padel_reservation:
+    type:     rest
     resource: "@MiwClubPadelBundle/Resources/config/routing/reservations.yml"
-    prefix:   /reservation
+    prefix:   api/reservations
 
 miw_club_padel_group:
+    type:     rest
     resource: "@MiwClubPadelBundle/Resources/config/routing/groups.yml"
-    prefix:   /group
+    prefix:   api/groups
 
 miw_club_padel_court:
     type:     rest
     resource: "@MiwClubPadelBundle/Resources/config/routing/courts.yml"
-    prefix:   /court
+    prefix:   api/courts

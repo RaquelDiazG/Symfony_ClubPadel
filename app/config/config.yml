@@ -82,10 +82,17 @@ swiftmailer:
 #sensio_framework_extra:
 #    view:   {   annotations: false }
 #    router: {   annotations: true }
-
+sensio_framework_extra:
+    request:
+        converters: true
+        auto_convert: true
 fos_rest:
     param_fetcher_listener: true
-    body_listener: true
+    body_converter:
+        enabled: true
+    body_listener:
+        decoders:
+            json: acme.decoder.json
     format_listener: true
     view:
         view_response_listener: 'force'
