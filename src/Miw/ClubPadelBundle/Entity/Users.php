@@ -5,8 +5,8 @@ namespace Miw\ClubPadelBundle\Entity;
 /**
  * Users
  */
-class Users
-{
+class Users {
+
     /**
      * @var integer
      */
@@ -100,8 +100,23 @@ class Users
     /**
      * Constructor
      */
-    public function __construct()
-    {
+    public function __construct($username = null, $email = null, $password = null, $roles = null) {
+        $this->username = $username;
+        $this->usernameCanonical = strtolower($username);
+        $this->email = $email;
+        $this->emailCanonical = strtolower($email);
+        $this->enabled = true;
+        $this->salt = "salt";
+        $this->password = $password;
+        $this->lastLogin = null;
+        $this->locked = false;
+        $this->expired = false;
+        $this->expiresAt = null;
+        $this->confirmationToken = null;
+        $this->passwordRequestedAt = null;
+        $this->roles = $roles;
+        $this->credentialsExpired = false;
+        $this->credentialsExpireAt = null;
         $this->group = new \Doctrine\Common\Collections\ArrayCollection();
     }
 
@@ -110,8 +125,7 @@ class Users
      *
      * @return integer
      */
-    public function getId()
-    {
+    public function getId() {
         return $this->id;
     }
 
@@ -122,8 +136,7 @@ class Users
      *
      * @return Users
      */
-    public function setUsername($username)
-    {
+    public function setUsername($username) {
         $this->username = $username;
 
         return $this;
@@ -134,8 +147,7 @@ class Users
      *
      * @return string
      */
-    public function getUsername()
-    {
+    public function getUsername() {
         return $this->username;
     }
 
@@ -146,8 +158,7 @@ class Users
      *
      * @return Users
      */
-    public function setUsernameCanonical($usernameCanonical)
-    {
+    public function setUsernameCanonical($usernameCanonical) {
         $this->usernameCanonical = $usernameCanonical;
 
         return $this;
@@ -158,8 +169,7 @@ class Users
      *
      * @return string
      */
-    public function getUsernameCanonical()
-    {
+    public function getUsernameCanonical() {
         return $this->usernameCanonical;
     }
 
@@ -170,8 +180,7 @@ class Users
      *
      * @return Users
      */
-    public function setEmail($email)
-    {
+    public function setEmail($email) {
         $this->email = $email;
 
         return $this;
@@ -182,8 +191,7 @@ class Users
      *
      * @return string
      */
-    public function getEmail()
-    {
+    public function getEmail() {
         return $this->email;
     }
 
@@ -194,8 +202,7 @@ class Users
      *
      * @return Users
      */
-    public function setEmailCanonical($emailCanonical)
-    {
+    public function setEmailCanonical($emailCanonical) {
         $this->emailCanonical = $emailCanonical;
 
         return $this;
@@ -206,8 +213,7 @@ class Users
      *
      * @return string
      */
-    public function getEmailCanonical()
-    {
+    public function getEmailCanonical() {
         return $this->emailCanonical;
     }
 
@@ -218,8 +224,7 @@ class Users
      *
      * @return Users
      */
-    public function setEnabled($enabled)
-    {
+    public function setEnabled($enabled) {
         $this->enabled = $enabled;
 
         return $this;
@@ -230,8 +235,7 @@ class Users
      *
      * @return boolean
      */
-    public function getEnabled()
-    {
+    public function getEnabled() {
         return $this->enabled;
     }
 
@@ -242,8 +246,7 @@ class Users
      *
      * @return Users
      */
-    public function setSalt($salt)
-    {
+    public function setSalt($salt) {
         $this->salt = $salt;
 
         return $this;
@@ -254,8 +257,7 @@ class Users
      *
      * @return string
      */
-    public function getSalt()
-    {
+    public function getSalt() {
         return $this->salt;
     }
 
@@ -266,8 +268,7 @@ class Users
      *
      * @return Users
      */
-    public function setPassword($password)
-    {
+    public function setPassword($password) {
         $this->password = $password;
 
         return $this;
@@ -278,8 +279,7 @@ class Users
      *
      * @return string
      */
-    public function getPassword()
-    {
+    public function getPassword() {
         return $this->password;
     }
 
@@ -290,8 +290,7 @@ class Users
      *
      * @return Users
      */
-    public function setLastLogin($lastLogin)
-    {
+    public function setLastLogin($lastLogin) {
         $this->lastLogin = $lastLogin;
 
         return $this;
@@ -302,8 +301,7 @@ class Users
      *
      * @return \DateTime
      */
-    public function getLastLogin()
-    {
+    public function getLastLogin() {
         return $this->lastLogin;
     }
 
@@ -314,8 +312,7 @@ class Users
      *
      * @return Users
      */
-    public function setLocked($locked)
-    {
+    public function setLocked($locked) {
         $this->locked = $locked;
 
         return $this;
@@ -326,8 +323,7 @@ class Users
      *
      * @return boolean
      */
-    public function getLocked()
-    {
+    public function getLocked() {
         return $this->locked;
     }
 
@@ -338,8 +334,7 @@ class Users
      *
      * @return Users
      */
-    public function setExpired($expired)
-    {
+    public function setExpired($expired) {
         $this->expired = $expired;
 
         return $this;
@@ -350,8 +345,7 @@ class Users
      *
      * @return boolean
      */
-    public function getExpired()
-    {
+    public function getExpired() {
         return $this->expired;
     }
 
@@ -362,8 +356,7 @@ class Users
      *
      * @return Users
      */
-    public function setExpiresAt($expiresAt)
-    {
+    public function setExpiresAt($expiresAt) {
         $this->expiresAt = $expiresAt;
 
         return $this;
@@ -374,8 +367,7 @@ class Users
      *
      * @return \DateTime
      */
-    public function getExpiresAt()
-    {
+    public function getExpiresAt() {
         return $this->expiresAt;
     }
 
@@ -386,8 +378,7 @@ class Users
      *
      * @return Users
      */
-    public function setConfirmationToken($confirmationToken)
-    {
+    public function setConfirmationToken($confirmationToken) {
         $this->confirmationToken = $confirmationToken;
 
         return $this;
@@ -398,8 +389,7 @@ class Users
      *
      * @return string
      */
-    public function getConfirmationToken()
-    {
+    public function getConfirmationToken() {
         return $this->confirmationToken;
     }
 
@@ -410,8 +400,7 @@ class Users
      *
      * @return Users
      */
-    public function setPasswordRequestedAt($passwordRequestedAt)
-    {
+    public function setPasswordRequestedAt($passwordRequestedAt) {
         $this->passwordRequestedAt = $passwordRequestedAt;
 
         return $this;
@@ -422,8 +411,7 @@ class Users
      *
      * @return \DateTime
      */
-    public function getPasswordRequestedAt()
-    {
+    public function getPasswordRequestedAt() {
         return $this->passwordRequestedAt;
     }
 
@@ -434,8 +422,7 @@ class Users
      *
      * @return Users
      */
-    public function setRoles($roles)
-    {
+    public function setRoles($roles) {
         $this->roles = $roles;
 
         return $this;
@@ -446,8 +433,7 @@ class Users
      *
      * @return array
      */
-    public function getRoles()
-    {
+    public function getRoles() {
         return $this->roles;
     }
 
@@ -458,8 +444,7 @@ class Users
      *
      * @return Users
      */
-    public function setCredentialsExpired($credentialsExpired)
-    {
+    public function setCredentialsExpired($credentialsExpired) {
         $this->credentialsExpired = $credentialsExpired;
 
         return $this;
@@ -470,8 +455,7 @@ class Users
      *
      * @return boolean
      */
-    public function getCredentialsExpired()
-    {
+    public function getCredentialsExpired() {
         return $this->credentialsExpired;
     }
 
@@ -482,8 +466,7 @@ class Users
      *
      * @return Users
      */
-    public function setCredentialsExpireAt($credentialsExpireAt)
-    {
+    public function setCredentialsExpireAt($credentialsExpireAt) {
         $this->credentialsExpireAt = $credentialsExpireAt;
 
         return $this;
@@ -494,8 +477,7 @@ class Users
      *
      * @return \DateTime
      */
-    public function getCredentialsExpireAt()
-    {
+    public function getCredentialsExpireAt() {
         return $this->credentialsExpireAt;
     }
 
@@ -506,8 +488,7 @@ class Users
      *
      * @return Users
      */
-    public function addGroup(\Miw\ClubPadelBundle\Entity\Groups $group)
-    {
+    public function addGroup(\Miw\ClubPadelBundle\Entity\Groups $group) {
         $this->group[] = $group;
 
         return $this;
@@ -518,8 +499,7 @@ class Users
      *
      * @param \Miw\ClubPadelBundle\Entity\Groups $group
      */
-    public function removeGroup(\Miw\ClubPadelBundle\Entity\Groups $group)
-    {
+    public function removeGroup(\Miw\ClubPadelBundle\Entity\Groups $group) {
         $this->group->removeElement($group);
     }
 
@@ -528,9 +508,8 @@ class Users
      *
      * @return \Doctrine\Common\Collections\Collection
      */
-    public function getGroup()
-    {
+    public function getGroup() {
         return $this->group;
     }
-}
 
+}
