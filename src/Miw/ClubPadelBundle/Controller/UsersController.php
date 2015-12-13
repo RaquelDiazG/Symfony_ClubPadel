@@ -29,7 +29,6 @@ class UsersController extends FOSRestController {
     public function createAction(Request $request) {
         $em = $this->getDoctrine()->getManager();
         $entity = new Users($request->get("username"), $request->get("email"), $request->get("password"));
-        $entity->addGroup($em->getRepository('MiwClubPadelBundle:Groups')->find($request->get("group")));
         $entity->setRoles(explode(" ", $request->get("roles")));
         $em->persist($entity);
         $em->flush();
@@ -51,7 +50,6 @@ class UsersController extends FOSRestController {
         $user->setUsername($request->get("username"));
         $user->setEmail($request->get("email"));
         $user->setPassword($request->get("password"));
-        $user->addGroup($em->getRepository('MiwClubPadelBundle:Groups')->find($request->get("group")));
         $user->setRoles(explode(" ", $request->get("roles")));
         $em->flush();
         return $user;
@@ -65,6 +63,20 @@ class UsersController extends FOSRestController {
         $em = $this->getDoctrine()->getManager();
         $em->remove($user);
         $em->flush();
+    }
+
+    /**
+     * Add user to group.
+     * @ParamConverter("user", class="MiwClubPadelBundle:Users",options={"mapping"={"userid"="id"}})
+     * @ParamConverter("group", class="MiwClubPadelBundle:Groups",options={"mapping"={"groupid"="id"}})
+     */
+    public function addUserToGroupAction(Users $user, Groups $group) {
+        $em = $this->getDoctrine()->getManager();
+        $em->getRepository('MiwClubPadelBundle:Users');
+        $group->addUser($user);
+        $user->addGroup($group);
+        $em->flush();
+        return $user;
     }
 
 }

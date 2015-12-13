@@ -22,3 +22,8 @@ user_delete:
     path:     /{id}
     defaults: { _controller: "MiwClubPadelBundle:Users:delete" }
     methods:  DELETE
+
+user_add_usertogroup:
+    path:     /{userid}/groups/{groupid}
+    defaults: { _controller: "MiwClubPadelBundle:Users:addUserToGroup" }
+    methods:  POST

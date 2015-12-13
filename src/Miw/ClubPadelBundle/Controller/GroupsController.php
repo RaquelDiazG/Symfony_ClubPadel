@@ -5,6 +5,9 @@ namespace Miw\ClubPadelBundle\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use FOS\RestBundle\Controller\FOSRestController;
 use Miw\ClubPadelBundle\Entity\Groups;
+use Miw\ClubPadelBundle\Entity\Users;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 
 /**
  * Groups controller.
@@ -29,7 +32,6 @@ class GroupsController extends FOSRestController {
         $entity = new Groups();
         $entity->setName($request->get("name"));
         $entity->setRoles(explode(" ", $request->get("roles")));
-//        $entity->addUser($em->getRepository('MiwClubPadelBundle:Users')->find($request->get("user")));
         $em->persist($entity);
         $em->flush();
         return $entity;
@@ -50,7 +52,6 @@ class GroupsController extends FOSRestController {
         $em->getRepository('MiwClubPadelBundle:Groups');
         $group->setName($request->get("name"));
         $group->setRoles(explode(" ", $request->get("roles")));
-//        $group->addUser($em->getRepository('MiwClubPadelBundle:Users')->find($request->get("user")));
         $em->flush();
         return $group;
     }
@@ -62,6 +63,20 @@ class GroupsController extends FOSRestController {
         $em = $this->getDoctrine()->getManager();
         $em->remove($group);
         $em->flush();
+    }
+
+    /**
+     * Add user to group.
+     * @ParamConverter("group", class="MiwClubPadelBundle:Groups",options={"mapping"={"groupid"="id"}})
+     * @ParamConverter("user", class="MiwClubPadelBundle:Users",options={"mapping"={"userid"="id"}})
+     */
+    public function addUserToGroupAction(Groups $group, Users $user) {
+        $em = $this->getDoctrine()->getManager();
+        $em->getRepository('MiwClubPadelBundle:Groups');
+        $group->addUser($user);
+        $user->addGroup($group);
+        $em->flush();
+        return $group;
     }
 
 }
